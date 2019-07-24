@@ -1,5 +1,5 @@
 extern crate rustyline;
-use std::io::{stdin,stdout,Write, Error};
+use std::io::{Error};
 use std::process::{Command, Child};
 use std::ffi::OsStr;
 use std::path::Path;
@@ -106,7 +106,6 @@ fn spawn_command<I,S,P>(command: &str, args: I,commands: &mut Peekable<P> , prev
 
 fn main() {
     env_logger::init();
-    let mut rl = Editor::<()>::new();
     let config = Config::builder()
         .history_ignore_space(true)
         .completion_type(CompletionType::List)
@@ -142,7 +141,6 @@ fn main() {
                             println!("Error: {:?}", err);
                             break
                         }
-                    Err(_) => "".to_string(),
 
     };
     let mut commands = line_in.trim().split(" | ").peekable();
